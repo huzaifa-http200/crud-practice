@@ -1,0 +1,93 @@
+<!-- <h1>This is a Test Form </h1>
+<div class="example-container">
+    <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+      <mat-label>Student First Name</mat-label>
+      <input matInput #input maxlength="10" placeholder="Ex. Muhammad">
+      <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+        <mat-label>Student Last Name</mat-label>
+        <input matInput #input maxlength="10" placeholder="Ex. Ahmed">
+        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+      </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Select Class</mat-label>
+      <mat-select>
+          <mat-option value="option">Class 1</mat-option>
+          <mat-option value="option">Class 2</mat-option>
+          <mat-option value="option">Class 3</mat-option>
+          <mat-option value="option">Class 4</mat-option>
+    </mat-select>
+      <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+    </mat-form-field>
+  </div>
+
+ -->
+
+
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+        <mat-label>Student First Name</mat-label>
+        <input matInput #input maxlength="10" placeholder="Ex. Muhammad" id="first-name" formControlName="firstName">
+        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+        <mat-label>Student Last Name</mat-label>
+        <input matInput #input maxlength="10" placeholder="Ex. Ahmed" id="last-name" formControlName="lastName">
+        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+    </mat-form-field>
+    <br />
+
+    <mat-form-field appearance="fill" >
+        <mat-label>Select Class</mat-label>
+        <mat-select formControlName="grade">
+            <mat-option value="Class 1" >Class 1</mat-option>
+            <mat-option value="Class 2">Class 2</mat-option>
+            <mat-option value="Class 3">Class 3</mat-option>
+            <mat-option value="Class 4">Class 4</mat-option>
+        </mat-select>
+        <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+    </mat-form-field>
+    <br />
+
+    <div formGroupName="address">
+        <h2>Address</h2>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Street </mat-label>
+            <textarea matInput formControlName="street"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>City </mat-label>
+            <textarea matInput formControlName="city"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>State </mat-label>
+            <textarea matInput formControlName="city"></textarea>
+        </mat-form-field>
+    </div>
+
+    <p>Complete the form to enable button.</p>
+    <button  mat-raised-button color="warn" type="submit" [disabled]="!profileForm.valid">Submit</button>
+</form>
+
+<hr>
+
+<p>Form Value: {{ profileForm.value | json }}</p>
+
+<p>Form Status: {{ profileForm.status }}</p>
+
+<button mat-raised-button color="primary"(click)="updateProfile()">Fill Dummy data</button>
+
+
+
+<!-- 
+  Copyright Google LLC. All Rights Reserved.
+  Use of this source code is governed by an MIT-style license that
+  can be found in the LICENSE file at https://angular.io/license
+  -->
