@@ -30,11 +30,11 @@
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
         <mat-cell *matCellDef="let element; let ind = index">
-            <button mat-button (click)="openDialog(element,ind)">Edit</button>
-            <!-- <td  class="action-link"> 
-                <a (click)="openDialog()">Edit</a> | 
-                <a (click)="openDialog()">Delete</a>  
-             </td> -->
+            <!-- <button mat-button (click)="openDialog()">Edit</button> -->
+            <td  class="action-link"> 
+                <button mat-raised-button color="primary" (click)="openDialog(element,ind)">Edit</button> | 
+                <button mat-raised-button color="warn" (click)="deleteRecord(ind)">Delete</button>  
+             </td>
            
         </mat-cell>
     </ng-container>

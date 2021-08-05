@@ -37,6 +37,18 @@ export class StudentListComponent implements OnInit {
     
   }
 
+  deleteRecord(ind:any): void {
+      let oldData: any = localStorage.getItem('data')
+      oldData = JSON.parse(oldData)
+      oldData.splice(ind,1)
+      oldData = JSON.stringify(oldData)
+      localStorage.setItem('data', oldData)
+      var tableData : any  = localStorage.getItem('data')
+      this.dataSource = JSON.parse(tableData);
+      this.table.renderRows();
+
+  }
+
   
 
 
