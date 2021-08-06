@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-student',
@@ -14,10 +15,11 @@ import { FormArray } from '@angular/forms';
 export class AddStudentComponent implements OnInit {
   public profileForm: any
 
+
   @Input() rowData: any
   @Input() index: any
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -35,7 +37,7 @@ export class AddStudentComponent implements OnInit {
       }),
     });
 
-    if (this.rowData.data) {
+    if (this.rowData) {
       this.profileForm.patchValue(this.rowData.data)
     }
 
@@ -62,10 +64,33 @@ export class AddStudentComponent implements OnInit {
   }
 
 
+  openSnackBar(msg: any) {
+    this._snackBar.open(msg, 'close', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
+
+
+
+
+
 
   onSubmit() {
 
     let newData: any = []
+
+    function validateName(arr: any, name: any): any {
+      let validFlag: any = false;
+      // console.log(newData[0].firstName)
+      for (var i = 0; i < arr.length; i++) {
+        // console.log(arr[i].firstName )
+        if (arr[i].firstName === name) {
+          validFlag = true
+        }
+      }
+      return validFlag
+    }
 
     if (!this.rowData) {
       newData.push(this.profileForm.value)
@@ -73,26 +98,63 @@ export class AddStudentComponent implements OnInit {
         console.log("NULL Data")
         newData = JSON.stringify(newData)
         localStorage.setItem('data', newData)
+
+        this.profileForm.patchValue({
+          firstName: '',
+          lastname: '',
+          grade: '',
+          address: {
+            street: '',
+            city: '',
+            state: ''
+          }
+        });
+        this.openSnackBar("Record Saved");
       }
       else {
         let oldData: any = localStorage.getItem('data')
         oldData = JSON.parse(oldData)
-        console.log(oldData)
-        oldData.push(this.profileForm.value)
-        oldData = JSON.stringify(oldData)
-        localStorage.setItem('data', oldData)
 
-        let showData: any = localStorage.getItem('data')
-        showData = JSON.parse(showData)
+        let chkName = validateName(oldData, newData[0].firstName)
+        if (chkName === true) {
+          this.openSnackBar("Name already Exist");
+        }
+        else if (chkName === false) {
+          oldData.push(this.profileForm.value)
+          oldData = JSON.stringify(oldData)
+          localStorage.setItem('data', oldData)
+
+
+          this.profileForm.patchValue({
+            firstName: '',
+            lastname: '',
+            grade: '',
+            address: {
+              street: '',
+              city: '',
+              state: ''
+            }
+          });
+          this.openSnackBar("Record Saved");
+        }
       }
     }
     else if (this.rowData) {
+
       let oldData: any = localStorage.getItem('data')
       oldData = JSON.parse(oldData)
-      oldData.splice(this.rowData.index, 1, this.profileForm.value)
-      oldData = JSON.stringify(oldData)
-      localStorage.setItem('data', oldData)
+      let chkName = validateName(oldData, newData[0].firstName)
+
+
+      if (chkName === true) {
+        this.openSnackBar("Name already Exist");
+      }
+      else if (chkName === false) {
+        oldData.splice(this.rowData.index, 1, this.profileForm.value)
+        oldData = JSON.stringify(oldData)
+        localStorage.setItem('data', oldData)
+        this.openSnackBar("Record Saved");
+      }
     }
   }
-
 }

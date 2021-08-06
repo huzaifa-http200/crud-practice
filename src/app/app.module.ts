@@ -38,6 +38,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './components/modal/modal.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { CrudService } from './crud.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import { ModalComponent } from './components/modal/modal.component';
     AddStudentComponent,
     EditStudentComponent,
     StudentListComponent,
-    ModalComponent
+    ModalComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
@@ -82,9 +86,10 @@ import { ModalComponent } from './components/modal/modal.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CrudService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

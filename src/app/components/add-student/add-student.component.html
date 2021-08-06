@@ -27,7 +27,7 @@
  -->
 
 
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" #formDirective="ngForm">
 
     <mat-form-field hintLabel="Max 10 characters" appearance="fill">
         <mat-label>Student First Name</mat-label>
