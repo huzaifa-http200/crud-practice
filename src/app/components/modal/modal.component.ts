@@ -1,5 +1,5 @@
 import {Component, Inject, Input} from '@angular/core';
-import { AddStudentComponent } from '../add-student/add-student.component';
+import { AddStudentComponent } from '../../pages/add-student/add-student.component';
 
 
 export interface DialogData {
