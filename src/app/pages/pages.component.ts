@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 })
 export class PagesComponent implements OnInit {
 
-  constructor(private router: Router) { 
+  constructor() { 
     
   }
 
-  routeLink (route: string) {
-    this.router.navigateByUrl(route)
-  }
+  // routeLink (route: string) {
+  //   this.router.navigateByUrl(route)
+  // }
 
   ngOnInit(): void {
   }

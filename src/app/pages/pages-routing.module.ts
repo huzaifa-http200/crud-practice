@@ -7,21 +7,21 @@ import { AddStudentComponent } from './add-student/add-student.component';
 import { StudentListComponent } from './student-list/student-list.component';
 
 const routes: Routes = [
-  {path:'',component:PagesComponent, children:[
-    {path:'add-student', component:AddStudentComponent},
-    {path:'student-list', component:StudentListComponent}
-  ]},
-  
+  {
+    path: '',
+    component: PagesComponent,
+    children: [
+      {
+        path: 'add-student',
+        component: AddStudentComponent,
+      },
+      { path: 'student-list', component: StudentListComponent },
+    ],
+  },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-
-export class PagesRoutingModule { }
-
-
-
-
+export class PagesRoutingModule {}

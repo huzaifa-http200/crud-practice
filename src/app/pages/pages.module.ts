@@ -11,9 +11,7 @@ import { RouterModule } from '@angular/router';
   declarations: [
     PagesComponent
   ],
-  imports: [BrowserModule,
-    AppRoutingModule,
-    RouterModule,
+  imports: [
     CommonModule,
     PagesRoutingModule
   ]

@@ -8,16 +8,13 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 
 const routes: Routes = [
   {path:'', pathMatch: 'full', redirectTo:'pages' },
-  {path: 'pages', component: PagesComponent , children:[
-    {path:'', component: PagesComponent },
-    {path:'add-student', component:AddStudentComponent},
-    {path:'student-list', component:StudentListComponent}
-  ]},
+  {path: 'pages',   loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
+},
   // {path:'add-student', component: AddStudentComponent},
   // {path:'edit-student', component: EditStudentComponent},
   // {path: 'student-list', component: StudentListComponent},
-  {path:'', component:PagesComponent},
-  {path: 'gallery', component: GalleryComponent}
+  // {path:'', component:PagesComponent},
+  // {path: 'gallery', component: GalleryComponent}
 ];
 
 @NgModule({
